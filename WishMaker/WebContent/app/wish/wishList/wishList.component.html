@@ -1,0 +1,34 @@
+<h1>Wish Maker</h1>
+
+<form ng-show="vm.showTable">
+	Wish: <input type="text" ng-model="vm.newWish.name"/>
+	<input type="submit" value="Add" ng-click="vm.addTodo(vm.newWish); vm.newWish={}"/>
+</form>
+
+<table ng-show="vm.showTable">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Price</th>
+			<th>Mark</th>
+			<th>Completed</th>
+			<th>Action</th>
+			<th>Note</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="list in vm.wishes">
+			<td ng-click="vm.display(list)">{{list.item}}</td>
+			<td>{{list.description}}</td>
+			<td>${{list.price}}</td>
+			<td><input type="checkbox" ng-model="list.complete" ng-change="vm.update(list)"/></td>
+			<td>{{list.complete}}</td>
+			<td><button ng-click="vm.deleteWish(list.id)">X</button></td>
+			<td>{{list.note}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<show-wish ng-hide="vm.showTable" go-back="vm.displayTable()" details="vm.selected" on-save="vm.addWish(parent)"></show-wish>
+<!-- <new-product on-create="vm.addBook(text)"></new-product> -->
